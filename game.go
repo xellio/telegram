@@ -28,3 +28,31 @@ type CallbackGame struct {
 //
 type GameHighScore struct {
 }
+
+//
+// SendGame - Use this method to send a game.
+// https://core.telegram.org/bots/api#sendgame
+// TODO
+//
+func SendGame() (*Message, error) {
+	return nil, nil
+}
+
+//
+// SetGameScore - Use this method to set the score of the specified user in a game.
+// https://core.telegram.org/bots/api#setgamescore
+// TODO
+//
+func SetGameScore() (*Message, error) {
+	return nil, nil
+}
+
+//
+// GetGameHighScores - Use this method to get data for high score tables.
+// Will return the score of the specified user and several of his neighbors in a game.
+// https://core.telegram.org/bots/api#getgamehighscores
+// TODO
+//
+func GetGameHighScores() ([]*GameHighScore, error) {
+	return nil, nil
+}

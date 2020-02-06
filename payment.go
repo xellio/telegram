@@ -90,3 +90,32 @@ type PreCheckoutQuery struct {
 	ShippingOptionID string     `json:"shipping_option_id"`
 	OrderInfo        *OrderInfo `json:"order_info"`
 }
+
+//
+// SendInvoice - Use this method to send invoices.
+// https://core.telegram.org/bots/api#sendinvoice
+// TODO
+//
+func SendInvoice() (*Message, error) {
+	return nil, nil
+}
+
+//
+// AnswerShippingQuery - If you sent an invoice requesting a shipping address and the parameter is_flexible was specified, the Bot API will send an Update with a shipping_query field to the bot.
+// Use this method to reply to shipping queries.
+// https://core.telegram.org/bots/api#answershippingquery
+// TODO
+//
+func AnswerShippingQuery() (success bool) {
+	return false
+}
+
+//
+// AnswerPreCheckoutQuery - Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the form of an Update with the field pre_checkout_query.
+// Use this method to respond to such pre-checkout queries.
+// https://core.telegram.org/bots/api#answerprecheckoutquery
+// TODO
+//
+func AnswerPreCheckoutQuery() (success bool) {
+	return false
+}

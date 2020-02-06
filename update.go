@@ -27,3 +27,40 @@ type Update struct {
 //
 type WebhookInfo struct {
 }
+
+//
+// GetUpdates - Use this method to receive incoming updates using long polling.
+// https://core.telegram.org/bots/api#getupdates
+// TODO
+//
+func GetUpdates() ([]*Update, error) {
+	return nil, nil
+}
+
+//
+// SetWebhook - Use this method to specify a url and receive incoming updates via an outgoing webhook.
+// Whenever there is an update for the bot, we will send an HTTPS POST request to the specified url, containing a JSON-serialized Update. In case of an unsuccessful request, we will give up after a reasonable amount of attempts. Returns True on success.
+// https://core.telegram.org/bots/api#setwebhook
+// TODO
+//
+func SetWebhook() bool {
+	return false
+}
+
+//
+// DeleteWebhook - Use this method to remove webhook integration if you decide to switch back to getUpdates.
+// https://core.telegram.org/bots/api#deletewebhook
+// TODO
+//
+func DeleteWebhook() bool {
+	return false
+}
+
+//
+// GetWebhookInfo - Use this method to get current webhook status.
+// https://core.telegram.org/bots/api#getwebhookinfo
+// TODO
+//
+func GetWebhookInfo() (*WebhookInfo, error) {
+	return nil, nil
+}
