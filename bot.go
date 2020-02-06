@@ -17,7 +17,7 @@ type Bot struct {
 }
 
 //
-// New ...
+// New - Create a new Bot instance
 //
 func New(name string, username string, token string) *Bot {
 	return &Bot{
@@ -27,6 +27,9 @@ func New(name string, username string, token string) *Bot {
 	}
 }
 
+//
+// call executes an API call to the telegram API
+//
 func (b *Bot) call(action string, payload ...interface{}) (interface{}, error) {
 	if _, ok := methods[action]; !ok {
 		return nil, fmt.Errorf("Passed action [%s] is not supported", action)
