@@ -19,7 +19,3 @@ func New(name string, username string, token string) *Bot {
 		Token:    token,
 	}
 }
-
-func (b Bot) GetUpdates() {
-
-}
