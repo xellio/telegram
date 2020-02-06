@@ -21,3 +21,11 @@ var methods = map[string]APIMethod{
 		Result: &User{},
 	},
 }
+
+//
+// Response ...
+//
+type Response struct {
+	OK     bool        `json:"ok"`
+	Result interface{} `json:"result"`
+}

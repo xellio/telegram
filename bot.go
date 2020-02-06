@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -54,7 +55,20 @@ func (b *Bot) call(action string, payload ...interface{}) (interface{}, error) {
 	}
 	defer resp.Body.Close()
 
-	err = json.NewDecoder(resp.Body).Decode(definition.Result)
-	return definition.Result, err
+	//bodyBytes, err := ioutil.ReadAll(resp.Body)
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//log.Println(string(bodyBytes))
+
+	res := &Response{
+		Result: definition.Result,
+	}
+
+	log.Println(res)
+
+	err = json.NewDecoder(resp.Body).Decode(res)
+	log.Println(res)
+	return res, err
 
 }
