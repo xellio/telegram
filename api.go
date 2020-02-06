@@ -1,13 +1,23 @@
 package telegram
 
-//
-// VHost ...
-//
-const VHost = "https://api.telegram.org/bot%s/"
+// BaseURL ...
+const BaseURL = "https://api.telegram.org/bot%s/%s"
 
 //
-// API ...
+// APIMethod ...
 //
-var API = map[string]string{
-	"getUpdates": "getUpdates",
+type APIMethod struct {
+	Name   string
+	Action string
+	Method string
+	Result interface{}
+}
+
+var methods = map[string]APIMethod{
+	"getMe": APIMethod{
+		Name:   "getMe",
+		Action: "getMe",
+		Method: "GET",
+		Result: &User{},
+	},
 }
