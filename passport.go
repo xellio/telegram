@@ -155,6 +155,6 @@ type PassportElementErrorUnspecified struct {
 // https://core.telegram.org/bots/api#setpassportdataerrors
 // TODO
 //
-func SetPassportDataErrors() (success bool) {
+func (b *Bot) SetPassportDataErrors() (success bool) {
 	return false
 }

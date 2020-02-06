@@ -33,7 +33,7 @@ type WebhookInfo struct {
 // https://core.telegram.org/bots/api#getupdates
 // TODO
 //
-func GetUpdates() ([]*Update, error) {
+func (b *Bot) GetUpdates() ([]*Update, error) {
 	return nil, nil
 }
 
@@ -43,7 +43,7 @@ func GetUpdates() ([]*Update, error) {
 // https://core.telegram.org/bots/api#setwebhook
 // TODO
 //
-func SetWebhook() bool {
+func (b *Bot) SetWebhook() (success bool) {
 	return false
 }
 
@@ -52,7 +52,7 @@ func SetWebhook() bool {
 // https://core.telegram.org/bots/api#deletewebhook
 // TODO
 //
-func DeleteWebhook() bool {
+func (b *Bot) DeleteWebhook() (success bool) {
 	return false
 }
 
@@ -61,6 +61,6 @@ func DeleteWebhook() bool {
 // https://core.telegram.org/bots/api#getwebhookinfo
 // TODO
 //
-func GetWebhookInfo() (*WebhookInfo, error) {
+func (b *Bot) GetWebhookInfo() (*WebhookInfo, error) {
 	return nil, nil
 }

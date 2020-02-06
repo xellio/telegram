@@ -96,7 +96,7 @@ type PreCheckoutQuery struct {
 // https://core.telegram.org/bots/api#sendinvoice
 // TODO
 //
-func SendInvoice() (*Message, error) {
+func (b *Bot) SendInvoice() (*Message, error) {
 	return nil, nil
 }
 
@@ -106,7 +106,7 @@ func SendInvoice() (*Message, error) {
 // https://core.telegram.org/bots/api#answershippingquery
 // TODO
 //
-func AnswerShippingQuery() (success bool) {
+func (b *Bot) AnswerShippingQuery() (success bool) {
 	return false
 }
 
@@ -116,6 +116,6 @@ func AnswerShippingQuery() (success bool) {
 // https://core.telegram.org/bots/api#answerprecheckoutquery
 // TODO
 //
-func AnswerPreCheckoutQuery() (success bool) {
+func (b *Bot) AnswerPreCheckoutQuery() (success bool) {
 	return false
 }

@@ -34,7 +34,7 @@ type GameHighScore struct {
 // https://core.telegram.org/bots/api#sendgame
 // TODO
 //
-func SendGame() (*Message, error) {
+func (b *Bot) SendGame() (*Message, error) {
 	return nil, nil
 }
 
@@ -43,7 +43,7 @@ func SendGame() (*Message, error) {
 // https://core.telegram.org/bots/api#setgamescore
 // TODO
 //
-func SetGameScore() (*Message, error) {
+func (b *Bot) SetGameScore() (*Message, error) {
 	return nil, nil
 }
 
@@ -53,6 +53,6 @@ func SetGameScore() (*Message, error) {
 // https://core.telegram.org/bots/api#getgamehighscores
 // TODO
 //
-func GetGameHighScores() ([]*GameHighScore, error) {
+func (b *Bot) GetGameHighScores() ([]*GameHighScore, error) {
 	return nil, nil
 }

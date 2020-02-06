@@ -40,7 +40,7 @@ type MaskPosition struct {
 // https://core.telegram.org/bots/api#sendsticker
 // TODO
 //
-func SendSticker() (*Message, error) {
+func (b *Bot) SendSticker() (*Message, error) {
 	return nil, nil
 }
 
@@ -49,7 +49,7 @@ func SendSticker() (*Message, error) {
 // https://core.telegram.org/bots/api#getstickerset
 // TODO
 //
-func GetStickerSet() (*StickerSet, error) {
+func (b *Bot) GetStickerSet() (*StickerSet, error) {
 	return nil, nil
 }
 
@@ -58,7 +58,7 @@ func GetStickerSet() (*StickerSet, error) {
 // https://core.telegram.org/bots/api#uploadstickerfile
 // TODO
 //
-func UploadStickerFile() (*File, error) {
+func (b *Bot) UploadStickerFile() (*File, error) {
 	return nil, nil
 }
 
@@ -68,7 +68,7 @@ func UploadStickerFile() (*File, error) {
 // https://core.telegram.org/bots/api#createnewstickerset
 // TODO
 //
-func CreateNewStickerSet() (success bool) {
+func (b *Bot) CreateNewStickerSet() (success bool) {
 	return false
 }
 
@@ -77,7 +77,7 @@ func CreateNewStickerSet() (success bool) {
 // https://core.telegram.org/bots/api#addstickertoset
 // TODO
 //
-func AddStickerToSet() (success bool) {
+func (b *Bot) AddStickerToSet() (success bool) {
 	return false
 }
 
@@ -86,7 +86,7 @@ func AddStickerToSet() (success bool) {
 // https://core.telegram.org/bots/api#setstickerpositioninset
 // TODO
 //
-func SetStickerPositionInSet() (success bool) {
+func (b *Bot) SetStickerPositionInSet() (success bool) {
 	return false
 }
 
@@ -95,6 +95,6 @@ func SetStickerPositionInSet() (success bool) {
 // https://core.telegram.org/bots/api#deletestickerfromset
 // TODO
 //
-func DeleteStickerFromSet() (success bool) {
+func (b *Bot) DeleteStickerFromSet() (success bool) {
 	return false
 }

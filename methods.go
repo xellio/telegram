@@ -4,7 +4,7 @@ package telegram
 // https://core.telegram.org/bots/api#getme
 // TODO
 //
-func GetMe() (*User, error) {
+func (b *Bot) GetMe() (*User, error) {
 	return nil, nil
 }
 
@@ -13,7 +13,7 @@ func GetMe() (*User, error) {
 // https://core.telegram.org/bots/api#sendmessage
 // TODO
 //
-func SendMessage() (*Message, error) {
+func (b *Bot) SendMessage() (*Message, error) {
 	return nil, nil
 }
 
@@ -22,7 +22,7 @@ func SendMessage() (*Message, error) {
 // https://core.telegram.org/bots/api#forwardmessage
 // TODO
 //
-func ForwardMessage() (*Message, error) {
+func (b *Bot) ForwardMessage() (*Message, error) {
 	return nil, nil
 }
 
@@ -31,7 +31,7 @@ func ForwardMessage() (*Message, error) {
 // https://core.telegram.org/bots/api#sendphoto
 // TODO
 //
-func SendPhoto() (*Message, error) {
+func (b *Bot) SendPhoto() (*Message, error) {
 	return nil, nil
 }
 
@@ -42,7 +42,7 @@ func SendPhoto() (*Message, error) {
 // https://core.telegram.org/bots/api#sendaudio
 // TODO
 //
-func SendAudio() (*Message, error) {
+func (b *Bot) SendAudio() (*Message, error) {
 	return nil, nil
 }
 
@@ -52,7 +52,7 @@ func SendAudio() (*Message, error) {
 // https://core.telegram.org/bots/api#senddocument
 // TODO
 //
-func SendDocument() (*Message, error) {
+func (b *Bot) SendDocument() (*Message, error) {
 	return nil, nil
 }
 
@@ -62,7 +62,7 @@ func SendDocument() (*Message, error) {
 // https://core.telegram.org/bots/api#sendvideo
 // TODO
 //
-func SendVideo() (*Message, error) {
+func (b *Bot) SendVideo() (*Message, error) {
 	return nil, nil
 }
 
@@ -72,7 +72,7 @@ func SendVideo() (*Message, error) {
 // https://core.telegram.org/bots/api#sendanimation
 // TODO
 //
-func SendAnimation() (*Message, error) {
+func (b *Bot) SendAnimation() (*Message, error) {
 	return nil, nil
 }
 
@@ -83,7 +83,7 @@ func SendAnimation() (*Message, error) {
 // https://core.telegram.org/bots/api#sendvoice
 // TODO
 //
-func SendVoice() (*Message, error) {
+func (b *Bot) SendVoice() (*Message, error) {
 	return nil, nil
 }
 
@@ -92,7 +92,7 @@ func SendVoice() (*Message, error) {
 // https://core.telegram.org/bots/api#sendvideonote
 // TODO
 //
-func SendVideoNote() (*Message, error) {
+func (b *Bot) SendVideoNote() (*Message, error) {
 	return nil, nil
 }
 
@@ -101,7 +101,7 @@ func SendVideoNote() (*Message, error) {
 // https://core.telegram.org/bots/api#sendmediagroup
 // TODO
 //
-func SendMediaGroup() (*Message, error) {
+func (b *Bot) SendMediaGroup() (*Message, error) {
 	return nil, nil
 }
 
@@ -110,7 +110,7 @@ func SendMediaGroup() (*Message, error) {
 // https://core.telegram.org/bots/api#sendlocation
 // TODO
 //
-func SendLocation() (*Message, error) {
+func (b *Bot) SendLocation() (*Message, error) {
 	return nil, nil
 }
 
@@ -120,7 +120,7 @@ func SendLocation() (*Message, error) {
 // https://core.telegram.org/bots/api#editmessagelivelocation
 // TODO
 //
-func EditMessageLiveLocation() (*Message, error) {
+func (b *Bot) EditMessageLiveLocation() (*Message, error) {
 	return nil, nil
 }
 
@@ -129,7 +129,7 @@ func EditMessageLiveLocation() (*Message, error) {
 // https://core.telegram.org/bots/api#stopmessagelivelocation
 // TODO
 //
-func StopMessageLiveLocation() (*Message, error) {
+func (b *Bot) StopMessageLiveLocation() (*Message, error) {
 	return nil, nil
 }
 
@@ -138,7 +138,7 @@ func StopMessageLiveLocation() (*Message, error) {
 // https://core.telegram.org/bots/api#sendvenue
 // TODO
 //
-func SendVenue() (*Message, error) {
+func (b *Bot) SendVenue() (*Message, error) {
 	return nil, nil
 }
 
@@ -147,7 +147,7 @@ func SendVenue() (*Message, error) {
 // https://core.telegram.org/bots/api#sendcontact
 // TODO
 //
-func SendContact() (*Message, error) {
+func (b *Bot) SendContact() (*Message, error) {
 	return nil, nil
 }
 
@@ -156,7 +156,7 @@ func SendContact() (*Message, error) {
 // https://core.telegram.org/bots/api#sendpoll
 // TODO
 //
-func SendPoll() (*Message, error) {
+func (b *Bot) SendPoll() (*Message, error) {
 	return nil, nil
 }
 
@@ -166,7 +166,7 @@ func SendPoll() (*Message, error) {
 // https://core.telegram.org/bots/api#sendchataction
 // TODO
 //
-func SendChatAction() (success bool) {
+func (b *Bot) SendChatAction() (success bool) {
 	return false
 }
 
@@ -175,7 +175,7 @@ func SendChatAction() (success bool) {
 // https://core.telegram.org/bots/api#getuserprofilephotos
 // TODO
 //
-func GetUserProfilePhotos() (*UserProfilePhotos, error) {
+func (b *Bot) GetUserProfilePhotos() (*UserProfilePhotos, error) {
 	return nil, nil
 }
 
@@ -185,7 +185,7 @@ func GetUserProfilePhotos() (*UserProfilePhotos, error) {
 // https://core.telegram.org/bots/api#getfile
 // TODO
 //
-func GetFile() (*File, error) {
+func (b *Bot) GetFile() (*File, error) {
 	return nil, nil
 }
 
@@ -195,7 +195,7 @@ func GetFile() (*File, error) {
 // https://core.telegram.org/bots/api#kickchatmember
 // TODO
 //
-func KickChatMember() (success bool) {
+func (b *Bot) KickChatMember() (success bool) {
 	return false
 }
 
@@ -205,7 +205,7 @@ func KickChatMember() (success bool) {
 // https://core.telegram.org/bots/api#unbanchatmember
 // TODO
 //
-func UnbanChatMember() (success bool) {
+func (b *Bot) UnbanChatMember() (success bool) {
 	return false
 }
 
@@ -215,7 +215,7 @@ func UnbanChatMember() (success bool) {
 // https://core.telegram.org/bots/api#restrictchatmember
 // TODO
 //
-func RestrictChatMember() (success bool) {
+func (b *Bot) RestrictChatMember() (success bool) {
 	return false
 }
 
@@ -225,7 +225,7 @@ func RestrictChatMember() (success bool) {
 // https://core.telegram.org/bots/api#promotechatmember
 // TODO
 //
-func PromoteChatMember() (success bool) {
+func (b *Bot) PromoteChatMember() (success bool) {
 	return false
 }
 
@@ -234,7 +234,7 @@ func PromoteChatMember() (success bool) {
 // https://core.telegram.org/bots/api#setchatadministratorcustomtitle
 // TODO
 //
-func SetChatAdministratorCustomTitle() (success bool) {
+func (b *Bot) SetChatAdministratorCustomTitle() (success bool) {
 	return false
 }
 
@@ -244,7 +244,7 @@ func SetChatAdministratorCustomTitle() (success bool) {
 // https://core.telegram.org/bots/api#setchatpermissions
 // TODO
 //
-func SetChatPermissions() (success bool) {
+func (b *Bot) SetChatPermissions() (success bool) {
 	return false
 }
 
@@ -254,7 +254,7 @@ func SetChatPermissions() (success bool) {
 // https://core.telegram.org/bots/api#exportchatinvitelink
 // TODO
 //
-func ExportChatInviteLink() (link string) {
+func (b *Bot) ExportChatInviteLink() (link string) {
 	return ""
 }
 
@@ -264,7 +264,7 @@ func ExportChatInviteLink() (link string) {
 // https://core.telegram.org/bots/api#setchatphoto
 // TODO
 //
-func SetChatPhoto() (success bool) {
+func (b *Bot) SetChatPhoto() (success bool) {
 	return false
 }
 
@@ -274,7 +274,7 @@ func SetChatPhoto() (success bool) {
 // https://core.telegram.org/bots/api#deletechatphoto
 // TODO
 //
-func DeleteChatPhoto() (success bool) {
+func (b *Bot) DeleteChatPhoto() (success bool) {
 	return false
 }
 
@@ -284,7 +284,7 @@ func DeleteChatPhoto() (success bool) {
 // https://core.telegram.org/bots/api#setchattitle
 // TODO
 //
-func SetChatTitle() (success bool) {
+func (b *Bot) SetChatTitle() (success bool) {
 	return false
 }
 
@@ -294,7 +294,7 @@ func SetChatTitle() (success bool) {
 // https://core.telegram.org/bots/api#setchatdescription
 // TODO
 //
-func SetChatDescription() (success bool) {
+func (b *Bot) SetChatDescription() (success bool) {
 	return false
 }
 
@@ -304,7 +304,7 @@ func SetChatDescription() (success bool) {
 // https://core.telegram.org/bots/api#pinchatmessage
 // TODO
 //
-func PinChatMessage() (success bool) {
+func (b *Bot) PinChatMessage() (success bool) {
 	return false
 }
 
@@ -314,7 +314,7 @@ func PinChatMessage() (success bool) {
 // https://core.telegram.org/bots/api#unpinchatmessage
 // TODO
 //
-func UnpinChatMessage() (success bool) {
+func (b *Bot) UnpinChatMessage() (success bool) {
 	return false
 }
 
@@ -323,7 +323,7 @@ func UnpinChatMessage() (success bool) {
 // https://core.telegram.org/bots/api#leavechat
 // TODO
 //
-func LeaveChat() (success bool) {
+func (b *Bot) LeaveChat() (success bool) {
 	return false
 }
 
@@ -332,7 +332,7 @@ func LeaveChat() (success bool) {
 // https://core.telegram.org/bots/api#getchat
 // TODO
 //
-func GetChat() (*Chat, error) {
+func (b *Bot) GetChat() (*Chat, error) {
 	return nil, nil
 }
 
@@ -341,7 +341,7 @@ func GetChat() (*Chat, error) {
 // https://core.telegram.org/bots/api#getchatadministrators
 // TODO
 //
-func GetChatAdministrators() ([]*ChatMember, error) {
+func (b *Bot) GetChatAdministrators() ([]*ChatMember, error) {
 	return nil, nil
 }
 
@@ -350,7 +350,7 @@ func GetChatAdministrators() ([]*ChatMember, error) {
 // https://core.telegram.org/bots/api#getchatmemberscount
 // TODO
 //
-func GetChatMembersCount() int {
+func (b *Bot) GetChatMembersCount() int {
 	return 0
 }
 
@@ -359,7 +359,7 @@ func GetChatMembersCount() int {
 // https://core.telegram.org/bots/api#getchatmember
 // TODO
 //
-func GetChatMember() (*ChatMember, error) {
+func (b *Bot) GetChatMember() (*ChatMember, error) {
 	return nil, nil
 }
 
@@ -369,7 +369,7 @@ func GetChatMember() (*ChatMember, error) {
 // https://core.telegram.org/bots/api#setchatstickerset
 // TODO
 //
-func SetChatStickerSet() (success bool) {
+func (b *Bot) SetChatStickerSet() (success bool) {
 	return false
 }
 
@@ -379,7 +379,7 @@ func SetChatStickerSet() (success bool) {
 // https://core.telegram.org/bots/api#deletechatstickerset
 // TODO
 //
-func DeleteChatStickerSet() (success bool) {
+func (b *Bot) DeleteChatStickerSet() (success bool) {
 	return false
 }
 
@@ -389,6 +389,6 @@ func DeleteChatStickerSet() (success bool) {
 // https://core.telegram.org/bots/api#answercallbackquery
 // TODO
 //
-func AnswerCallbackQuery() (success bool) {
+func (b *Bot) AnswerCallbackQuery() (success bool) {
 	return false
 }
