@@ -240,7 +240,7 @@ type Venue struct {
 //
 type PollOption struct {
 	Text       string `json:"text"`
-	VoterCount int    `json:"voter_count"`
+	VoterCount int    `json:"voter_count,omitempty"`
 }
 
 //
@@ -267,6 +267,21 @@ type Poll struct {
 	Type                  string        `json:"type"`
 	AllowsMultipleAnswers bool          `json:"allows_multiple_answers"`
 	CorrectOptionID       int           `json:"correct_option_id"`
+}
+
+//
+// NewPoll - This object is used to create a new poll.
+//
+type NewPoll struct {
+	ChatID                int      `json:"chat_id"`
+	Question              string   `json:"question"`
+	Options               []string `json:"options"`
+	TotalVoterCount       int      `json:"total_voter_count"`
+	IsClosed              bool     `json:"is_closed"`
+	IsAnonymous           bool     `json:"is_anonymous"`
+	Type                  string   `json:"type"`
+	AllowsMultipleAnswers bool     `json:"allows_multiple_answers"`
+	CorrectOptionID       int      `json:"correct_option_id"`
 }
 
 //
