@@ -21,9 +21,18 @@ type Bot struct {
 // New - Create a new Bot instance
 //
 func New(token string) *Bot {
-	return &Bot{
+	b := &Bot{
 		token: token,
 	}
+
+	u, err := b.GetMe()
+	if err != nil {
+		return b
+	}
+
+	b.Username = u.Username
+	b.Name = u.FirstName
+	return b
 }
 
 //
