@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"net/url"
 	"reflect"
@@ -46,11 +47,17 @@ func (b *Bot) prepareRequest(definition APIMethod, payload ...interface{}) (*htt
 		req, err = b.prepareGETRequest(apiURL, payload...)
 		break
 	case http.MethodPost:
-	default:
 		req, err = b.preparePOSTRequest(apiURL, payload...)
 		break
 	}
+
+	if err != nil {
+		return nil, err
+	}
+
 	req.Header.Set("Content-Type", "application/json")
+
+	log.Println(req)
 
 	return req, err
 }
@@ -80,11 +87,18 @@ func (b *Bot) prepareGETRequest(apiURL string, payload ...interface{}) (*http.Re
 }
 
 func (b *Bot) preparePOSTRequest(apiURL string, payload ...interface{}) (*http.Request, error) {
-	data, err := json.Marshal(payload)
+
+	var pl interface{}
+	pl = payload
+	if len(payload) == 1 {
+		pl = payload[0]
+	}
+
+	data, err := json.Marshal(pl)
 	if err != nil {
 		return nil, err
 	}
-
+	log.Println(string(data))
 	return http.NewRequest(http.MethodPost, apiURL, bytes.NewBuffer(data))
 }
 

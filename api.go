@@ -1,5 +1,7 @@
 package telegram
 
+import "net/http"
+
 // BaseURL ...
 const BaseURL = "https://api.telegram.org/bot%s/%s"
 
@@ -20,20 +22,26 @@ var methods = map[string]APIMethod{
 	"getMe": APIMethod{
 		Name:   "getMe",
 		Action: "getMe",
-		Method: "GET",
+		Method: http.MethodGet,
 		Result: User{},
 	},
 	"getUpdates": APIMethod{
 		Name:   "getUpdates",
 		Action: "getUpdates",
-		Method: "GET",
+		Method: http.MethodGet,
 		Result: []Update{},
 	},
 	"getChat": APIMethod{
 		Name:   "getChat",
 		Action: "getChat",
-		Method: "GET",
+		Method: http.MethodGet,
 		Result: Chat{},
+	},
+	"sendMessage": APIMethod{
+		Name:   "sendMessage",
+		Action: "sendMessage",
+		Method: http.MethodPost,
+		Result: Message{},
 	},
 }
 
