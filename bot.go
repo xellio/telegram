@@ -20,19 +20,19 @@ type Bot struct {
 //
 // New - Create a new Bot instance
 //
-func New(token string) *Bot {
+func New(token string) (*Bot, error) {
 	b := &Bot{
 		token: token,
 	}
 
 	u, err := b.GetMe()
 	if err != nil {
-		return b
+		return nil, err
 	}
 
 	b.Username = u.Username
 	b.Name = u.FirstName
-	return b
+	return b, nil
 }
 
 //
@@ -66,6 +66,10 @@ func (b *Bot) call(action string, payload ...interface{}) (interface{}, error) {
 	err = json.NewDecoder(resp.Body).Decode(&res)
 	if err != nil {
 		return nil, err
+	}
+
+	if !res.OK {
+		return nil, fmt.Errorf("%d: %s", res.ErrorCode, res.Description)
 	}
 
 	tmp, err := json.Marshal(res.Result)

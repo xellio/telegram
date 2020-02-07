@@ -2,7 +2,6 @@ package telegram
 
 // GetMe - A simple method for testing your bot's auth token.
 // https://core.telegram.org/bots/api#getme
-// TODO
 //
 func (b *Bot) GetMe() (*User, error) {
 	result, err := b.call("getMe")
