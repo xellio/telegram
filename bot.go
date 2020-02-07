@@ -76,6 +76,11 @@ func prepareResult(result interface{}, resultDefinition interface{}) (interface{
 	if err != nil {
 		return nil, err
 	}
+
+	if resultDefinition == nil {
+		return tmp, nil
+	}
+
 	decoder := json.NewDecoder(bytes.NewReader(tmp))
 	retValue := reflect.New(reflect.TypeOf(resultDefinition))
 	res := retValue.Interface()

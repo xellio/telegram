@@ -44,6 +44,17 @@ var methods = map[string]APIMethod{
 		Method: http.MethodGet,
 		Result: Chat{},
 	},
+	"getChatAdministrators": APIMethod{
+		Name:   "getChatAdministrators",
+		Action: "getChatAdministrators",
+		Method: http.MethodGet,
+		Result: []ChatMember{},
+	},
+	"getChatMembersCount": APIMethod{
+		Name:   "getChatMembersCount",
+		Action: "getChatMembersCount",
+		Method: http.MethodGet,
+	},
 	"sendMessage": APIMethod{
 		Name:   "sendMessage",
 		Action: "sendMessage",

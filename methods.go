@@ -352,9 +352,9 @@ func (b *Bot) LeaveChat() (success bool) {
 // GetChat - Use this method to get up to date information about the chat (current name of the user for one-on-one conversations, current username of a user, group or channel, etc.).
 // https://core.telegram.org/bots/api#getchat
 //
-func (b *Bot) GetChat(id int) (*Chat, error) {
+func (b *Bot) GetChat(chatID int) (*Chat, error) {
 	params := map[string]string{
-		"chat_id": strconv.Itoa(id),
+		"chat_id": strconv.Itoa(chatID),
 	}
 
 	result, err := b.call("getChat", params)
@@ -367,19 +367,38 @@ func (b *Bot) GetChat(id int) (*Chat, error) {
 //
 // GetChatAdministrators - Use this method to get a list of administrators in a chat.
 // https://core.telegram.org/bots/api#getchatadministrators
-// TODO
 //
-func (b *Bot) GetChatAdministrators() ([]*ChatMember, error) {
-	return nil, nil
+func (b *Bot) GetChatAdministrators(chatID int) ([]*ChatMember, error) {
+	params := map[string]string{
+		"chat_id": strconv.Itoa(chatID),
+	}
+	result, err := b.call("getChatAdministrators", params)
+	if err != nil {
+		return nil, err
+	}
+
+	var admins []*ChatMember
+	for _, v := range *result.(*[]ChatMember) {
+		admins = append(admins, &v)
+	}
+
+	return admins, nil
 }
 
 //
 // GetChatMembersCount - Use this method to get the number of members in a chat.
 // https://core.telegram.org/bots/api#getchatmemberscount
-// TODO
 //
-func (b *Bot) GetChatMembersCount() int {
-	return 0
+func (b *Bot) GetChatMembersCount(chatID int) (uint8, error) {
+	params := map[string]string{
+		"chat_id": strconv.Itoa(chatID),
+	}
+	result, err := b.call("getChatMembersCount", params)
+	if err != nil {
+		return 0, err
+	}
+	res := result.([]uint8)
+	return res[0], nil
 }
 
 //
