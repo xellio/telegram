@@ -1,5 +1,10 @@
 package telegram
 
+import (
+	"encoding/json"
+	"strconv"
+)
+
 //
 // Update - This object represents an incoming update.
 // At most one of the optional parameters can be present in any given update.
@@ -32,8 +37,21 @@ type WebhookInfo struct {
 // GetUpdates - Use this method to receive incoming updates using long polling.
 // https://core.telegram.org/bots/api#getupdates
 //
-func (b *Bot) GetUpdates() ([]*Update, error) {
-	result, err := b.call("getUpdates")
+func (b *Bot) GetUpdates(offset int, limit int, timeout int, allowedUpdates []string) ([]*Update, error) {
+
+	params := map[string]string{
+		"offset":  strconv.Itoa(offset),
+		"limit":   strconv.Itoa(limit),
+		"timeout": strconv.Itoa(timeout),
+	}
+	if allowedUpdates != nil {
+		data, err := json.Marshal(allowedUpdates)
+		if err == nil {
+			params["allowed_updates"] = string(data)
+		}
+	}
+
+	result, err := b.call("getUpdates", params)
 	if err != nil {
 		return nil, err
 	}
