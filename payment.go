@@ -106,7 +106,7 @@ func (b *Bot) SendInvoice() (*Message, error) {
 // https://core.telegram.org/bots/api#answershippingquery
 // TODO
 //
-func (b *Bot) AnswerShippingQuery() (success bool) {
+func (b *Bot) AnswerShippingQuery() (ok bool) {
 	return false
 }
 
@@ -116,6 +116,6 @@ func (b *Bot) AnswerShippingQuery() (success bool) {
 // https://core.telegram.org/bots/api#answerprecheckoutquery
 // TODO
 //
-func (b *Bot) AnswerPreCheckoutQuery() (success bool) {
+func (b *Bot) AnswerPreCheckoutQuery() (ok bool) {
 	return false
 }

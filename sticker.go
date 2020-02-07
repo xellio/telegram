@@ -68,7 +68,7 @@ func (b *Bot) UploadStickerFile() (*File, error) {
 // https://core.telegram.org/bots/api#createnewstickerset
 // TODO
 //
-func (b *Bot) CreateNewStickerSet() (success bool) {
+func (b *Bot) CreateNewStickerSet() (ok bool) {
 	return false
 }
 
@@ -77,7 +77,7 @@ func (b *Bot) CreateNewStickerSet() (success bool) {
 // https://core.telegram.org/bots/api#addstickertoset
 // TODO
 //
-func (b *Bot) AddStickerToSet() (success bool) {
+func (b *Bot) AddStickerToSet() (ok bool) {
 	return false
 }
 
@@ -86,7 +86,7 @@ func (b *Bot) AddStickerToSet() (success bool) {
 // https://core.telegram.org/bots/api#setstickerpositioninset
 // TODO
 //
-func (b *Bot) SetStickerPositionInSet() (success bool) {
+func (b *Bot) SetStickerPositionInSet() (ok bool) {
 	return false
 }
 
@@ -95,6 +95,6 @@ func (b *Bot) SetStickerPositionInSet() (success bool) {
 // https://core.telegram.org/bots/api#deletestickerfromset
 // TODO
 //
-func (b *Bot) DeleteStickerFromSet() (success bool) {
+func (b *Bot) DeleteStickerFromSet() (ok bool) {
 	return false
 }

@@ -187,7 +187,7 @@ func (b *Bot) SendPoll() (*Message, error) {
 // https://core.telegram.org/bots/api#sendchataction
 // TODO
 //
-func (b *Bot) SendChatAction() (success bool) {
+func (b *Bot) SendChatAction() (ok bool) {
 	return false
 }
 
@@ -216,7 +216,7 @@ func (b *Bot) GetFile() (*File, error) {
 // https://core.telegram.org/bots/api#kickchatmember
 // TODO
 //
-func (b *Bot) KickChatMember() (success bool) {
+func (b *Bot) KickChatMember() (ok bool) {
 	return false
 }
 
@@ -226,7 +226,7 @@ func (b *Bot) KickChatMember() (success bool) {
 // https://core.telegram.org/bots/api#unbanchatmember
 // TODO
 //
-func (b *Bot) UnbanChatMember() (success bool) {
+func (b *Bot) UnbanChatMember() (ok bool) {
 	return false
 }
 
@@ -236,7 +236,7 @@ func (b *Bot) UnbanChatMember() (success bool) {
 // https://core.telegram.org/bots/api#restrictchatmember
 // TODO
 //
-func (b *Bot) RestrictChatMember() (success bool) {
+func (b *Bot) RestrictChatMember() (ok bool) {
 	return false
 }
 
@@ -246,7 +246,7 @@ func (b *Bot) RestrictChatMember() (success bool) {
 // https://core.telegram.org/bots/api#promotechatmember
 // TODO
 //
-func (b *Bot) PromoteChatMember() (success bool) {
+func (b *Bot) PromoteChatMember() (ok bool) {
 	return false
 }
 
@@ -255,7 +255,7 @@ func (b *Bot) PromoteChatMember() (success bool) {
 // https://core.telegram.org/bots/api#setchatadministratorcustomtitle
 // TODO
 //
-func (b *Bot) SetChatAdministratorCustomTitle() (success bool) {
+func (b *Bot) SetChatAdministratorCustomTitle() (ok bool) {
 	return false
 }
 
@@ -265,7 +265,7 @@ func (b *Bot) SetChatAdministratorCustomTitle() (success bool) {
 // https://core.telegram.org/bots/api#setchatpermissions
 // TODO
 //
-func (b *Bot) SetChatPermissions() (success bool) {
+func (b *Bot) SetChatPermissions() (ok bool) {
 	return false
 }
 
@@ -285,7 +285,7 @@ func (b *Bot) ExportChatInviteLink() (link string) {
 // https://core.telegram.org/bots/api#setchatphoto
 // TODO
 //
-func (b *Bot) SetChatPhoto() (success bool) {
+func (b *Bot) SetChatPhoto() (ok bool) {
 	return false
 }
 
@@ -295,7 +295,7 @@ func (b *Bot) SetChatPhoto() (success bool) {
 // https://core.telegram.org/bots/api#deletechatphoto
 // TODO
 //
-func (b *Bot) DeleteChatPhoto() (success bool) {
+func (b *Bot) DeleteChatPhoto() (ok bool) {
 	return false
 }
 
@@ -303,20 +303,35 @@ func (b *Bot) DeleteChatPhoto() (success bool) {
 // SetChatTitle - Use this method to change the title of a chat.
 // Titles can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
 // https://core.telegram.org/bots/api#setchattitle
-// TODO
 //
-func (b *Bot) SetChatTitle() (success bool) {
-	return false
+func (b *Bot) SetChatTitle(chatID int, title string) (ok bool, err error) {
+	params := map[string]interface{}{
+		"chat_id": chatID,
+		"title":   title,
+	}
+
+	result, err := b.call("setChatTitle", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
 
 //
 // SetChatDescription - Use this method to change the description of a group, a supergroup or a channel.
 // The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
 // https://core.telegram.org/bots/api#setchatdescription
-// TODO
 //
-func (b *Bot) SetChatDescription() (success bool) {
-	return false
+func (b *Bot) SetChatDescription(chatID int, description string) (ok bool, err error) {
+	params := map[string]interface{}{
+		"chat_id":     chatID,
+		"description": description,
+	}
+	result, err := b.call("setChatDescription", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
 
 //
@@ -325,7 +340,7 @@ func (b *Bot) SetChatDescription() (success bool) {
 // https://core.telegram.org/bots/api#pinchatmessage
 // TODO
 //
-func (b *Bot) PinChatMessage() (success bool) {
+func (b *Bot) PinChatMessage() (ok bool) {
 	return false
 }
 
@@ -335,7 +350,7 @@ func (b *Bot) PinChatMessage() (success bool) {
 // https://core.telegram.org/bots/api#unpinchatmessage
 // TODO
 //
-func (b *Bot) UnpinChatMessage() (success bool) {
+func (b *Bot) UnpinChatMessage() (ok bool) {
 	return false
 }
 
@@ -344,7 +359,7 @@ func (b *Bot) UnpinChatMessage() (success bool) {
 // https://core.telegram.org/bots/api#leavechat
 // TODO
 //
-func (b *Bot) LeaveChat() (success bool) {
+func (b *Bot) LeaveChat() (ok bool) {
 	return false
 }
 
@@ -420,7 +435,7 @@ func (b *Bot) GetChatMember() (*ChatMember, error) {
 // https://core.telegram.org/bots/api#setchatstickerset
 // TODO
 //
-func (b *Bot) SetChatStickerSet() (success bool) {
+func (b *Bot) SetChatStickerSet() (ok bool) {
 	return false
 }
 
@@ -430,7 +445,7 @@ func (b *Bot) SetChatStickerSet() (success bool) {
 // https://core.telegram.org/bots/api#deletechatstickerset
 // TODO
 //
-func (b *Bot) DeleteChatStickerSet() (success bool) {
+func (b *Bot) DeleteChatStickerSet() (ok bool) {
 	return false
 }
 
@@ -440,6 +455,6 @@ func (b *Bot) DeleteChatStickerSet() (success bool) {
 // https://core.telegram.org/bots/api#answercallbackquery
 // TODO
 //
-func (b *Bot) AnswerCallbackQuery() (success bool) {
+func (b *Bot) AnswerCallbackQuery() (ok bool) {
 	return false
 }
