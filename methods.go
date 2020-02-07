@@ -175,10 +175,34 @@ func (b *Bot) SendContact() (*Message, error) {
 //
 // SendPoll - Use this method to send a native poll.
 // https://core.telegram.org/bots/api#sendpoll
-// TODO
 //
-func (b *Bot) SendPoll() (*Message, error) {
-	return nil, nil
+func (b *Bot) SendPoll(chatID int, question string, options []string, isAnonymous bool, pollType string, allowMultipleAnswers bool, correctOptionID int, isClosed bool, disableNotification bool, replyToMessageID int, replyMarkup interface{}) (*Message, error) {
+	params := map[string]interface{}{
+		"chat_id":                 chatID,
+		"question":                question,
+		"options":                 options,
+		"is_anonymous":            isAnonymous,
+		"type":                    pollType,
+		"allows_multiple_answers": allowMultipleAnswers,
+		"is_closed":               isClosed,
+		"disable_notification":    disableNotification,
+	}
+	if correctOptionID != 9999 {
+		params["correct_option_id"] = correctOptionID
+	}
+	if replyToMessageID != 9999 {
+		params["reply_to_message_id"] = replyToMessageID
+	}
+
+	if replyMarkup != nil {
+		params["reply_markup"] = replyMarkup
+	}
+
+	result, err := b.call("sendPoll", params)
+	if err != nil {
+		return nil, err
+	}
+	return result.(*Message), nil
 }
 
 //

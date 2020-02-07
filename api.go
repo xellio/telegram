@@ -61,6 +61,12 @@ var methods = map[string]APIMethod{
 		Method: http.MethodPost,
 		Result: Message{},
 	},
+	"sendPoll": APIMethod{
+		Name:   "sendPoll",
+		Action: "sendPoll",
+		Method: http.MethodPost,
+		Result: Message{},
+	},
 	"setChatTitle": APIMethod{
 		Name:   "setChatTitle",
 		Action: "setChatTitle",
