@@ -92,6 +92,17 @@ type Message struct {
 }
 
 //
+// NewMessage - This object is used to create a new poll.
+//
+type NewMessage struct {
+	ChatID              int         `json:"chat_id"`
+	Text                string      `json:"text"`
+	DisableNotification bool        `json:"disable_notification,omitempty"`
+	ReplyToMessageID    int         `json:"reply_to_message_id,omitempty"`
+	ReplyMarkup         interface{} `json:"reply_markup,omitempty"`
+}
+
+//
 // MessageEntity - This object represents one special entity in a text message.
 // For example, hashtags, usernames, URLs, etc.
 // https://core.telegram.org/bots/api#messageentity
@@ -276,12 +287,12 @@ type NewPoll struct {
 	ChatID                int      `json:"chat_id"`
 	Question              string   `json:"question"`
 	Options               []string `json:"options"`
-	TotalVoterCount       int      `json:"total_voter_count"`
-	IsClosed              bool     `json:"is_closed"`
-	IsAnonymous           bool     `json:"is_anonymous"`
-	Type                  string   `json:"type"`
-	AllowsMultipleAnswers bool     `json:"allows_multiple_answers"`
-	CorrectOptionID       int      `json:"correct_option_id"`
+	TotalVoterCount       int      `json:"total_voter_count,omitempty"`
+	IsClosed              bool     `json:"is_closed,omitempty"`
+	IsAnonymous           bool     `json:"is_anonymous,omitempty"`
+	Type                  string   `json:"type,omitempty"`
+	AllowsMultipleAnswers bool     `json:"allows_multiple_answers,omitempty"`
+	CorrectOptionID       int      `json:"correct_option_id,omitempty"`
 }
 
 //

@@ -19,19 +19,8 @@ func (b *Bot) GetMe() (*User, error) {
 // SendMessage - Use this method to send text messages.
 // https://core.telegram.org/bots/api#sendmessage
 //
-func (b *Bot) SendMessage(chatID int, text string, parseMode string, disableWebPagePreview bool, disableNotification bool, replyToMessageID int, replyMarkup interface{}) (*Message, error) {
-	params := map[string]interface{}{
-		"chat_id":              chatID,
-		"text":                 text,
-		"disable_notification": disableNotification,
-		"reply_to_message_id":  replyToMessageID,
-	}
-
-	if replyMarkup != nil {
-		params["reply_markup"] = replyMarkup
-	}
-
-	result, err := b.call("sendMessage", params)
+func (b *Bot) SendMessage(message *NewMessage) (*Message, error) {
+	result, err := b.call("sendMessage", message)
 	if err != nil {
 		return nil, err
 	}
