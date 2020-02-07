@@ -29,6 +29,12 @@ var methods = map[string]APIMethod{
 		Method: "GET",
 		Result: []Update{},
 	},
+	"getChat": APIMethod{
+		Name:   "getChat",
+		Action: "getChat",
+		Method: "GET",
+		Result: Chat{},
+	},
 }
 
 //

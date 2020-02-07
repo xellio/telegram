@@ -1,5 +1,9 @@
 package telegram
 
+import (
+	"strconv"
+)
+
 // GetMe - A simple method for testing your bot's auth token.
 // https://core.telegram.org/bots/api#getme
 //
@@ -16,7 +20,7 @@ func (b *Bot) GetMe() (*User, error) {
 // https://core.telegram.org/bots/api#sendmessage
 // TODO
 //
-func (b *Bot) SendMessage() (*Message, error) {
+func (b *Bot) SendMessage(msg Message) (*Message, error) {
 	return nil, nil
 }
 
@@ -333,10 +337,17 @@ func (b *Bot) LeaveChat() (success bool) {
 //
 // GetChat - Use this method to get up to date information about the chat (current name of the user for one-on-one conversations, current username of a user, group or channel, etc.).
 // https://core.telegram.org/bots/api#getchat
-// TODO
 //
-func (b *Bot) GetChat() (*Chat, error) {
-	return nil, nil
+func (b *Bot) GetChat(id int) (*Chat, error) {
+	params := map[string]string{
+		"chat_id": strconv.Itoa(id),
+	}
+
+	result, err := b.call("getChat", params)
+	if err != nil {
+		return nil, err
+	}
+	return result.(*Chat), nil
 }
 
 //
