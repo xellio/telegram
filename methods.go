@@ -389,7 +389,7 @@ func (b *Bot) GetChatAdministrators(chatID int) ([]*ChatMember, error) {
 // GetChatMembersCount - Use this method to get the number of members in a chat.
 // https://core.telegram.org/bots/api#getchatmemberscount
 //
-func (b *Bot) GetChatMembersCount(chatID int) (uint8, error) {
+func (b *Bot) GetChatMembersCount(chatID int) (int, error) {
 	params := map[string]string{
 		"chat_id": strconv.Itoa(chatID),
 	}
@@ -397,8 +397,12 @@ func (b *Bot) GetChatMembersCount(chatID int) (uint8, error) {
 	if err != nil {
 		return 0, err
 	}
-	res := result.([]uint8)
-	return res[0], nil
+	res := result.([]byte)
+	cnt, err := strconv.Atoi(string(res))
+	if err != nil {
+		return 0, err
+	}
+	return cnt, nil
 }
 
 //
