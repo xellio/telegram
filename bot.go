@@ -9,7 +9,7 @@ import (
 )
 
 //
-// Bot ...
+// Bot  - This object represents a bot.
 //
 type Bot struct {
 	Name     string
@@ -18,7 +18,7 @@ type Bot struct {
 }
 
 //
-// New - Create a new Bot instance
+// New - Create a new Bot instance.
 //
 func New(token string) (*Bot, error) {
 	b := &Bot{
@@ -36,7 +36,7 @@ func New(token string) (*Bot, error) {
 }
 
 //
-// call executes an API call to the telegram API
+// call executes an API call to the telegram API.
 //
 func (b *Bot) call(action string, payload ...interface{}) (interface{}, error) {
 	if _, ok := methods[action]; !ok {
@@ -44,7 +44,6 @@ func (b *Bot) call(action string, payload ...interface{}) (interface{}, error) {
 	}
 	definition := methods[action]
 	url := fmt.Sprintf(BaseURL, b.token, definition.Action)
-
 	data, err := json.Marshal(payload)
 	if err != nil {
 		return nil, err

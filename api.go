@@ -4,7 +4,7 @@ package telegram
 const BaseURL = "https://api.telegram.org/bot%s/%s"
 
 //
-// APIMethod ...
+// APIMethod  - This object represents an API call definition used in the methods map.
 //
 type APIMethod struct {
 	Name   string
@@ -13,6 +13,9 @@ type APIMethod struct {
 	Result interface{}
 }
 
+//
+// methods map contains a definition of known and supported API calls.
+//
 var methods = map[string]APIMethod{
 	"getMe": APIMethod{
 		Name:   "getMe",
@@ -20,10 +23,16 @@ var methods = map[string]APIMethod{
 		Method: "GET",
 		Result: User{},
 	},
+	"getUpdates": APIMethod{
+		Name:   "getUpdates",
+		Action: "getUpdates",
+		Method: "GET",
+		Result: []Update{},
+	},
 }
 
 //
-// Response ...
+// Response - This object represents a response from the telegram API.
 //
 type Response struct {
 	OK          bool        `json:"ok"`

@@ -31,10 +31,20 @@ type WebhookInfo struct {
 //
 // GetUpdates - Use this method to receive incoming updates using long polling.
 // https://core.telegram.org/bots/api#getupdates
-// TODO
 //
 func (b *Bot) GetUpdates() ([]*Update, error) {
-	return nil, nil
+	result, err := b.call("getUpdates")
+	if err != nil {
+		return nil, err
+	}
+
+	var updates []*Update
+	for _, v := range *result.(*[]Update) {
+		updates = append(updates, &v)
+	}
+
+	return updates, nil
+
 }
 
 //
