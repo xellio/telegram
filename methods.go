@@ -5,8 +5,11 @@ package telegram
 // TODO
 //
 func (b *Bot) GetMe() (*User, error) {
-	b.call("getMe")
-	return nil, nil
+	result, err := b.call("getMe")
+	if err != nil {
+		return nil, err
+	}
+	return result.(*User), nil
 }
 
 //

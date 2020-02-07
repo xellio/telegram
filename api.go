@@ -18,7 +18,7 @@ var methods = map[string]APIMethod{
 		Name:   "getMe",
 		Action: "getMe",
 		Method: "GET",
-		Result: &User{},
+		Result: User{},
 	},
 }
 

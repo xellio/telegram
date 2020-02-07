@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
+	"reflect"
 )
 
 //
@@ -20,11 +20,9 @@ type Bot struct {
 //
 // New - Create a new Bot instance
 //
-func New(name string, username string, token string) *Bot {
+func New(token string) *Bot {
 	return &Bot{
-		Name:     name,
-		Username: username,
-		token:    token,
+		token: token,
 	}
 }
 
@@ -55,20 +53,20 @@ func (b *Bot) call(action string, payload ...interface{}) (interface{}, error) {
 	}
 	defer resp.Body.Close()
 
-	//bodyBytes, err := ioutil.ReadAll(resp.Body)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//log.Println(string(bodyBytes))
-
-	res := &Response{
-		Result: definition.Result,
+	var res Response
+	err = json.NewDecoder(resp.Body).Decode(&res)
+	if err != nil {
+		return nil, err
 	}
 
-	log.Println(res)
+	tmp, err := json.Marshal(res.Result)
+	if err != nil {
+		return nil, err
+	}
 
-	err = json.NewDecoder(resp.Body).Decode(res)
-	log.Println(res)
-	return res, err
-
+	decoder := json.NewDecoder(bytes.NewReader(tmp))
+	retValue := reflect.New(reflect.TypeOf(definition.Result))
+	retInner := retValue.Interface()
+	decoder.Decode(retInner)
+	return retInner, err
 }
