@@ -75,7 +75,7 @@ user, err := bot.GetMe()
 ##### Game
 - [sendGame](https://core.telegram.org/bots/api#sendgame)
 - [setGameScore](https://core.telegram.org/bots/api#setgamescore)
-- [getGameHighScores](https://core.telegram.org/bots/)api#getgamehighscores
+- [getGameHighScores](https://core.telegram.org/bots/api#getgamehighscores)
 ##### Passport
 - [setPassportDataErrors](https://core.telegram.org/bots/api#setpassportdataerrors)
 ##### Payment
