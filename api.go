@@ -189,6 +189,22 @@ var methods = map[string]APIMethod{
 		Action: "setStickerPositionInSet",
 		Method: http.MethodPost,
 	},
+	"sendInvoice": APIMethod{
+		Name:   "sendInvoice",
+		Action: "sendInvoice",
+		Method: http.MethodPost,
+		Result: Message{},
+	},
+	"answerShippingQuery": APIMethod{
+		Name:   "answerShippingQuery",
+		Action: "answerShippingQuery",
+		Method: http.MethodPost,
+	},
+	"answerPreCheckoutQuery": APIMethod{
+		Name:   "answerPreCheckoutQuery",
+		Action: "answerPreCheckoutQuery",
+		Method: http.MethodPost,
+	},
 }
 
 //

@@ -3,9 +3,10 @@ package telegram
 //
 // LabeledPrice - This object represents a portion of the price for goods or services.
 // https://core.telegram.org/bots/api#labeledprice
-// TODO
 //
 type LabeledPrice struct {
+	Label  string `json:"label"`
+	Amount int    `json:"amount"`
 }
 
 //
@@ -18,6 +19,35 @@ type Invoice struct {
 	StartParameter string `json:"start_parameter"`
 	Currency       string `json:"currency"`
 	TotalAmount    int    `json:"total_amount"`
+}
+
+//
+// NewInvoice - This object is used to create a new invoice in the sendInvoice function
+//
+type NewInvoice struct {
+	ChatID                    int             `json:"chat_id"`
+	Title                     string          `json:"title"`
+	Description               string          `json:"description"`
+	Payload                   string          `json:"payload"`
+	ProviderToken             string          `json:"provider_token"`
+	StartParameter            string          `json:"start_parameter"`
+	Currency                  string          `json:"currency"`
+	Prices                    []*LabeledPrice `json:"prices"`
+	ProviderData              string          `json:"provider_data,omitempty"`
+	PhotoURL                  string          `json:"photo_url,omitempty"`
+	PhotoSize                 int             `json:"photo_size,omitempty"`
+	PhotoWidth                int             `json:"photo_width,omitempty"`
+	PhotoHeight               int             `json:"photo_height,omitempty"`
+	NeedName                  bool            `json:"need_name,omitempty"`
+	NeedPhoneNumber           bool            `json:"need_phone_number,omitempty"`
+	NeedEmail                 bool            `json:"need_email,omitempty"`
+	NeedShippingAddress       bool            `json:"need_shipping_address,omitempty"`
+	SendPhoneNumberToProvider bool            `json:"send_phone_number_to_provider,omitempty"`
+	SendEmailToProvider       bool            `json:"send_email_to_provider,omitempty"`
+	IsFlexible                bool            `json:"is_flexible,omitempty"`
+	DiasableNotification      bool            `json:"disable_notification,omitempty"`
+	ReplyToMessageID          int             `json:"reply_to_message_id,omitempty"`
+	ReplyMarkup               interface{}     `json:"reply_markup,omitempty"`
 }
 
 //
@@ -47,9 +77,11 @@ type OrderInfo struct {
 //
 // ShippingOption - This object represents one shipping option.
 // https://core.telegram.org/bots/api#shippingoption
-// TODO
 //
 type ShippingOption struct {
+	ID     string          `json:"id"`
+	Title  string          `json:"title"`
+	Prices []*LabeledPrice `json:"prices"`
 }
 
 //
@@ -94,28 +126,47 @@ type PreCheckoutQuery struct {
 //
 // SendInvoice - Use this method to send invoices.
 // https://core.telegram.org/bots/api#sendinvoice
-// TODO
 //
-func (b *Bot) SendInvoice() (*Message, error) {
-	return nil, nil
+func (b *Bot) SendInvoice(invoice *NewInvoice) (*Message, error) {
+	result, err := b.call("sendInvoice", invoice)
+	if err != nil {
+		return nil, err
+	}
+	return result.(*Message), nil
 }
 
 //
 // AnswerShippingQuery - If you sent an invoice requesting a shipping address and the parameter is_flexible was specified, the Bot API will send an Update with a shipping_query field to the bot.
 // Use this method to reply to shipping queries.
 // https://core.telegram.org/bots/api#answershippingquery
-// TODO
 //
-func (b *Bot) AnswerShippingQuery() (ok bool, err error) {
-	return false, nil
+func (b *Bot) AnswerShippingQuery(shippingQueryID string, alright bool, shippingOptions []*ShippingOption, errorMessage string) (ok bool, err error) {
+	params := map[string]interface{}{
+		"shipping_query_id": shippingQueryID,
+		"ok":                alright,
+		"error_message":     errorMessage,
+	}
+	result, err := b.call("answerShippingQuery", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
 
 //
 // AnswerPreCheckoutQuery - Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the form of an Update with the field pre_checkout_query.
 // Use this method to respond to such pre-checkout queries.
 // https://core.telegram.org/bots/api#answerprecheckoutquery
-// TODO
 //
-func (b *Bot) AnswerPreCheckoutQuery() (ok bool, err error) {
-	return false, nil
+func (b *Bot) AnswerPreCheckoutQuery(preCheckoutQueryID string, alright bool, errorMessage string) (ok bool, err error) {
+	params := map[string]interface{}{
+		"pre_checkout_query_id": preCheckoutQueryID,
+		"ok":                    alright,
+		"error_message":         errorMessage,
+	}
+	result, err := b.call("answerPreCheckoutQuery", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
