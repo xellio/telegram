@@ -38,6 +38,12 @@ var methods = map[string]APIMethod{
 		Method: http.MethodGet,
 		Result: []Update{},
 	},
+	"getWebhookInfo": APIMethod{
+		Name:   "getWebhookInfo",
+		Action: "getWebhookInfo",
+		Method: http.MethodGet,
+		Result: WebhookInfo{},
+	},
 	"getChat": APIMethod{
 		Name:   "getChat",
 		Action: "getChat",
@@ -82,6 +88,11 @@ var methods = map[string]APIMethod{
 	"exportChatInviteLink": APIMethod{
 		Name:   "exportChatInviteLink",
 		Action: "exportChatInviteLink",
+		Method: http.MethodPost,
+	},
+	"deleteWebhook": APIMethod{
+		Name:   "deleteWebhook",
+		Action: "deleteWebhook",
 		Method: http.MethodPost,
 	},
 	"sendMessage": APIMethod{

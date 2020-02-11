@@ -28,9 +28,15 @@ type Update struct {
 //
 // WebhookInfo - Contains information about the current status of a webhook.
 // https://core.telegram.org/bots/api#webhookinfo
-// TODO
 //
 type WebhookInfo struct {
+	URL                  string   `json:"url"`
+	HasCustomCertificate bool     `json:"has_custom_certificate"`
+	PendingUpdateCount   int      `json:"pending_update_count"`
+	LastErrorDate        int      `json:"last_error_date"`
+	LastErrorMessage     string   `json:"last_error_message"`
+	MaxConnections       int      `json:"max_connections"`
+	AllowedUpdates       []string `json:"allowed_updates"`
 }
 
 //
@@ -78,17 +84,25 @@ func (b *Bot) SetWebhook() (ok bool, err error) {
 //
 // DeleteWebhook - Use this method to remove webhook integration if you decide to switch back to getUpdates.
 // https://core.telegram.org/bots/api#deletewebhook
-// TODO
 //
 func (b *Bot) DeleteWebhook() (ok bool, err error) {
-	return false, nil
+	result, err := b.call("deleteWebhook", nil)
+	if err != nil {
+		return false, err
+	}
+
+	return result.(bool), nil
 }
 
 //
 // GetWebhookInfo - Use this method to get current webhook status.
 // https://core.telegram.org/bots/api#getwebhookinfo
-// TODO
 //
 func (b *Bot) GetWebhookInfo() (*WebhookInfo, error) {
-	return nil, nil
+	result, err := b.call("getWebhookInfo", nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return result.(*WebhookInfo), nil
 }

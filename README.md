@@ -11,6 +11,8 @@ user, err := bot.GetMe()
 ### Supported API Calls
 ##### Update
 - [getUpdates](https://core.telegram.org/bots/api#getupdates)
+- [deleteWebhook](https://core.telegram.org/bots/api#deletewebhook)
+- [getWebhookInfo](https://core.telegram.org/bots/api#getwebhookinfo)
 ##### Methods
 - [getMe](https://core.telegram.org/bots/api#getme)
 - [sendMessage](https://core.telegram.org/bots/api#sendmessage)
@@ -47,8 +49,6 @@ user, err := bot.GetMe()
 ### Todo
 ##### Update
 - [setWebhook](https://core.telegram.org/bots/api#setwebhook)
-- [deleteWebhook](https://core.telegram.org/bots/api#deletewebhook)
-- [getWebhookInfo](https://core.telegram.org/bots/api#getwebhookinfo)
 ##### Methods
 - [sendPhoto](https://core.telegram.org/bots/api#sendphoto)
 - [sendAudio](https://core.telegram.org/bots/api#sendaudio)
