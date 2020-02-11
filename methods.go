@@ -30,10 +30,19 @@ func (b *Bot) SendMessage(message *NewMessage) (*Message, error) {
 //
 // ForwardMessage - Use this method to forward messages of any kind.
 // https://core.telegram.org/bots/api#forwardmessage
-// TODO
 //
-func (b *Bot) ForwardMessage() (*Message, error) {
-	return nil, nil
+func (b *Bot) ForwardMessage(chatID int, fromChatID int, disableNotification bool, messageID int) (*Message, error) {
+	params := map[string]interface{}{
+		"chat_id":              chatID,
+		"from_chat_id":         fromChatID,
+		"disable_notification": disableNotification,
+		"message_id":           messageID,
+	}
+	result, err := b.call("forwardMessage", params)
+	if err != nil {
+		return nil, err
+	}
+	return result.(*Message), nil
 }
 
 //
@@ -118,10 +127,13 @@ func (b *Bot) SendMediaGroup() (*Message, error) {
 //
 // SendLocation - Use this method to send point on the map.
 // https://core.telegram.org/bots/api#sendlocation
-// TODO
 //
-func (b *Bot) SendLocation() (*Message, error) {
-	return nil, nil
+func (b *Bot) SendLocation(location *NewLocation) (*Message, error) {
+	result, err := b.call("sendLocation", location)
+	if err != nil {
+		return nil, err
+	}
+	return result.(*Message), nil
 }
 
 //
@@ -177,49 +189,87 @@ func (b *Bot) SendPoll(poll *NewPoll) (*Message, error) {
 // SendChatAction - Use this method when you need to tell the user that something is happening on the bot's side.
 // The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status).
 // https://core.telegram.org/bots/api#sendchataction
-// TODO
 //
-func (b *Bot) SendChatAction() (ok bool) {
-	return false
+func (b *Bot) SendChatAction(chatID int, action string) (ok bool, err error) {
+	params := map[string]interface{}{
+		"chat_id": chatID,
+		"action":  action,
+	}
+	result, err := b.call("sendChatAction", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
 
 //
 // GetUserProfilePhotos - Use this method to get a list of profile pictures for a user.
 // https://core.telegram.org/bots/api#getuserprofilephotos
-// TODO
 //
-func (b *Bot) GetUserProfilePhotos() (*UserProfilePhotos, error) {
-	return nil, nil
+func (b *Bot) GetUserProfilePhotos(userID int, offset int, limit int) (*UserProfilePhotos, error) {
+	params := map[string]string{
+		"chat_id": strconv.Itoa(userID),
+		"offset":  strconv.Itoa(offset),
+		"limit":   strconv.Itoa(limit),
+	}
+	result, err := b.call("getUserProfilePhotos", params)
+	if err != nil {
+		return nil, err
+	}
+	return result.(*UserProfilePhotos), nil
 }
 
 //
 // GetFile - Use this method to get basic info about a file and prepare it for downloading.
 // For the moment, bots can download files of up to 20MB in size.
 // https://core.telegram.org/bots/api#getfile
-// TODO
 //
-func (b *Bot) GetFile() (*File, error) {
-	return nil, nil
+func (b *Bot) GetFile(fileID int) (*File, error) {
+	params := map[string]string{
+		"file_id": strconv.Itoa(fileID),
+	}
+	result, err := b.call("getFile", params)
+	if err != nil {
+		return nil, err
+	}
+	return result.(*File), nil
 }
 
 //
 // KickChatMember - Use this method to kick a user from a group, a supergroup or a channel.
 // In the case of supergroups and channels, the user will not be able to return to the group on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
 // https://core.telegram.org/bots/api#kickchatmember
-// TODO
 //
-func (b *Bot) KickChatMember() (ok bool) {
-	return false
+func (b *Bot) KickChatMember(chatID int, userID int, untilDate int) (ok bool, err error) {
+	params := map[string]interface{}{
+		"chat_id":    chatID,
+		"user_id":    userID,
+		"until_date": untilDate,
+	}
+
+	result, err := b.call("kickChatMember", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
 
 //
 // UnbanChatMember - Use this method to unban a previously kicked user in a supergroup or channel.
 // The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work.
 // https://core.telegram.org/bots/api#unbanchatmember
-// TODO
 //
-func (b *Bot) UnbanChatMember() (ok bool) {
-	return false
+func (b *Bot) UnbanChatMember(chatID int, userID int) (ok bool, err error) {
+	params := map[string]interface{}{
+		"chat_id": chatID,
+		"user_id": userID,
+	}
+
+	result, err := b.call("unbanChatMember", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
 
 //
@@ -228,8 +278,8 @@ func (b *Bot) UnbanChatMember() (ok bool) {
 // https://core.telegram.org/bots/api#restrictchatmember
 // TODO
 //
-func (b *Bot) RestrictChatMember() (ok bool) {
-	return false
+func (b *Bot) RestrictChatMember() (ok bool, err error) {
+	return false, nil
 }
 
 //
@@ -238,17 +288,26 @@ func (b *Bot) RestrictChatMember() (ok bool) {
 // https://core.telegram.org/bots/api#promotechatmember
 // TODO
 //
-func (b *Bot) PromoteChatMember() (ok bool) {
-	return false
+func (b *Bot) PromoteChatMember() (ok bool, err error) {
+	return false, nil
 }
 
 //
 // SetChatAdministratorCustomTitle - Use this method to set a custom title for an administrator in a supergroup promoted by the bot.
 // https://core.telegram.org/bots/api#setchatadministratorcustomtitle
-// TODO
 //
-func (b *Bot) SetChatAdministratorCustomTitle() (ok bool) {
-	return false
+func (b *Bot) SetChatAdministratorCustomTitle(chatID int, userID int, customTitle string) (ok bool, err error) {
+	params := map[string]interface{}{
+		"chat_id":      chatID,
+		"user_id":      userID,
+		"custom_title": customTitle,
+	}
+
+	result, err := b.call("setChatAdministratorCustomTitle", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
 
 //
@@ -257,18 +316,25 @@ func (b *Bot) SetChatAdministratorCustomTitle() (ok bool) {
 // https://core.telegram.org/bots/api#setchatpermissions
 // TODO
 //
-func (b *Bot) SetChatPermissions() (ok bool) {
-	return false
+func (b *Bot) SetChatPermissions() (ok bool, err error) {
+	return false, nil
 }
 
 //
 // ExportChatInviteLink - Use this method to generate a new invite link for a chat; any previously generated link is revoked.
 // The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
 // https://core.telegram.org/bots/api#exportchatinvitelink
-// TODO
 //
-func (b *Bot) ExportChatInviteLink() (link string) {
-	return ""
+func (b *Bot) ExportChatInviteLink(chatID int) (link string, err error) {
+	params := map[string]interface{}{
+		"chat_id": chatID,
+	}
+
+	result, err := b.call("exportChatInviteLink", params)
+	if err != nil {
+		return "", err
+	}
+	return result.(string), nil
 }
 
 //
@@ -277,18 +343,25 @@ func (b *Bot) ExportChatInviteLink() (link string) {
 // https://core.telegram.org/bots/api#setchatphoto
 // TODO
 //
-func (b *Bot) SetChatPhoto() (ok bool) {
-	return false
+func (b *Bot) SetChatPhoto() (ok bool, err error) {
+	return false, nil
 }
 
 //
 // DeleteChatPhoto - Use this method to delete a chat photo.
 // Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
 // https://core.telegram.org/bots/api#deletechatphoto
-// TODO
 //
-func (b *Bot) DeleteChatPhoto() (ok bool) {
-	return false
+func (b *Bot) DeleteChatPhoto(chatID int) (ok bool, err error) {
+	params := map[string]interface{}{
+		"chat_id": chatID,
+	}
+
+	result, err := b.call("deleteChatPhoto", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
 
 //
@@ -330,29 +403,49 @@ func (b *Bot) SetChatDescription(chatID int, description string) (ok bool, err e
 // PinChatMessage - Use this method to pin a message in a group, a supergroup, or a channel.
 // The bot must be an administrator in the chat for this to work and must have the ‘can_pin_messages’ admin right in the supergroup or ‘can_edit_messages’ admin right in the channel.
 // https://core.telegram.org/bots/api#pinchatmessage
-// TODO
 //
-func (b *Bot) PinChatMessage() (ok bool) {
-	return false
+func (b *Bot) PinChatMessage(chatID int, messageID int, disableNotification bool) (ok bool, err error) {
+	params := map[string]interface{}{
+		"chat_id":              chatID,
+		"message_id":           messageID,
+		"disable_notification": disableNotification,
+	}
+	result, err := b.call("pinChatMessage", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
 
 //
 // UnpinChatMessage - Use this method to unpin a message in a group, a supergroup, or a channel.
 // The bot must be an administrator in the chat for this to work and must have the ‘can_pin_messages’ admin right in the supergroup or ‘can_edit_messages’ admin right in the channel.
 // https://core.telegram.org/bots/api#unpinchatmessage
-// TODO
 //
-func (b *Bot) UnpinChatMessage() (ok bool) {
-	return false
+func (b *Bot) UnpinChatMessage(chatID int) (ok bool, err error) {
+	params := map[string]interface{}{
+		"chat_id": chatID,
+	}
+	result, err := b.call("unpinChatMessage", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
 
 //
 // LeaveChat - Use this method for your bot to leave a group, supergroup or channel.
 // https://core.telegram.org/bots/api#leavechat
-// TODO
 //
-func (b *Bot) LeaveChat() (ok bool) {
-	return false
+func (b *Bot) LeaveChat(chatID int) (ok bool, err error) {
+	params := map[string]interface{}{
+		"chat_id": chatID,
+	}
+	result, err := b.call("leaveChat", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
 
 //
@@ -415,30 +508,50 @@ func (b *Bot) GetChatMembersCount(chatID int) (int, error) {
 //
 // GetChatMember - Use this method to get information about a member of a chat.
 // https://core.telegram.org/bots/api#getchatmember
-// TODO
 //
-func (b *Bot) GetChatMember() (*ChatMember, error) {
-	return nil, nil
+func (b *Bot) GetChatMember(chatID int, userID int) (*ChatMember, error) {
+	params := map[string]string{
+		"chat_id": strconv.Itoa(chatID),
+		"user_id": strconv.Itoa(userID),
+	}
+	result, err := b.call("getChatMember", params)
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ChatMember), nil
 }
 
 //
 // SetChatStickerSet - Use this method to set a new group sticker set for a supergroup.
 // The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method.
 // https://core.telegram.org/bots/api#setchatstickerset
-// TODO
 //
-func (b *Bot) SetChatStickerSet() (ok bool) {
-	return false
+func (b *Bot) SetChatStickerSet(chatID int, stickerSetName string) (ok bool, err error) {
+	params := map[string]interface{}{
+		"chat_id":          chatID,
+		"sticker_set_name": stickerSetName,
+	}
+	result, err := b.call("setChatStickerSet", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
 
 //
 // DeleteChatStickerSet - Use this method to delete a group sticker set from a supergroup.
 // The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method.
 // https://core.telegram.org/bots/api#deletechatstickerset
-// TODO
 //
-func (b *Bot) DeleteChatStickerSet() (ok bool) {
-	return false
+func (b *Bot) DeleteChatStickerSet(chatID int) (ok bool, err error) {
+	params := map[string]interface{}{
+		"chat_id": chatID,
+	}
+	result, err := b.call("deleteChatStickerSet", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
 
 //
@@ -447,6 +560,6 @@ func (b *Bot) DeleteChatStickerSet() (ok bool) {
 // https://core.telegram.org/bots/api#answercallbackquery
 // TODO
 //
-func (b *Bot) AnswerCallbackQuery() (ok bool) {
-	return false
+func (b *Bot) AnswerCallbackQuery() (ok bool, err error) {
+	return false, nil
 }

@@ -20,9 +20,13 @@ type Sticker struct {
 //
 // StickerSet - This object represents a sticker set.
 // https://core.telegram.org/bots/api#stickerset
-// TODO
 //
 type StickerSet struct {
+	Name          string     `json:"name"`
+	Title         string     `json:"title"`
+	IsAnimated    bool       `json:"is_animated"`
+	ContainsMasks bool       `json:"contains_masks"`
+	Stickers      []*Sticker `json:"stickers"`
 }
 
 // MaskPosition - This object describes the position on faces where a mask should be placed by default.
@@ -47,10 +51,17 @@ func (b *Bot) SendSticker() (*Message, error) {
 //
 // GetStickerSet - Use this method to get a sticker set.
 // https://core.telegram.org/bots/api#getstickerset
-// TODO
 //
-func (b *Bot) GetStickerSet() (*StickerSet, error) {
-	return nil, nil
+func (b *Bot) GetStickerSet(name string) (*StickerSet, error) {
+	params := map[string]string{
+		"name": name,
+	}
+
+	result, err := b.call("getStickerSet", params)
+	if err != nil {
+		return nil, err
+	}
+	return result.(*StickerSet), nil
 }
 
 //
@@ -68,8 +79,8 @@ func (b *Bot) UploadStickerFile() (*File, error) {
 // https://core.telegram.org/bots/api#createnewstickerset
 // TODO
 //
-func (b *Bot) CreateNewStickerSet() (ok bool) {
-	return false
+func (b *Bot) CreateNewStickerSet() (ok bool, err error) {
+	return false, nil
 }
 
 //
@@ -77,24 +88,39 @@ func (b *Bot) CreateNewStickerSet() (ok bool) {
 // https://core.telegram.org/bots/api#addstickertoset
 // TODO
 //
-func (b *Bot) AddStickerToSet() (ok bool) {
-	return false
+func (b *Bot) AddStickerToSet() (ok bool, err error) {
+	return false, nil
 }
 
 //
 // SetStickerPositionInSet - Use this method to move a sticker in a set created by the bot to a specific position.
 // https://core.telegram.org/bots/api#setstickerpositioninset
-// TODO
 //
-func (b *Bot) SetStickerPositionInSet() (ok bool) {
-	return false
+func (b *Bot) SetStickerPositionInSet(sticker string, position int) (ok bool, err error) {
+	params := map[string]interface{}{
+		"sticker":  sticker,
+		"position": position,
+	}
+
+	result, err := b.call("setStickerPositionInSet", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
 
 //
 // DeleteStickerFromSet - Use this method to delete a sticker from a set created by the bot.
 // https://core.telegram.org/bots/api#deletestickerfromset
-// TODO
 //
-func (b *Bot) DeleteStickerFromSet() (ok bool) {
-	return false
+func (b *Bot) DeleteStickerFromSet(sticker string) (ok bool, err error) {
+	params := map[string]interface{}{
+		"sticker": sticker,
+	}
+
+	result, err := b.call("deleteStickerFromSet", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }

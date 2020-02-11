@@ -234,6 +234,19 @@ type Location struct {
 }
 
 //
+// NewLocation - This object is used to send a location
+//
+type NewLocation struct {
+	ChatID              int         `json:"chat_id"`
+	Latitude            float64     `json:"latitude"`
+	Longitude           float64     `json:"longitude"`
+	LivePeriod          int         `json:"live_period,omitempty"`
+	DisableNotification bool        `json:"disable_notification,omitempty"`
+	ReplyToMessageID    int         `json:"reply_to_message_id,omitempty"`
+	ReplyMarkup         interface{} `json:"reply_markup,omitempty"`
+}
+
+//
 // Venue - This object represents a venue.
 // https://core.telegram.org/bots/api#venue
 //

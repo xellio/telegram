@@ -71,8 +71,8 @@ func (b *Bot) GetUpdates(offset int, limit int, timeout int, allowedUpdates []st
 // https://core.telegram.org/bots/api#setwebhook
 // TODO
 //
-func (b *Bot) SetWebhook() (ok bool) {
-	return false
+func (b *Bot) SetWebhook() (ok bool, err error) {
+	return false, nil
 }
 
 //
@@ -80,8 +80,8 @@ func (b *Bot) SetWebhook() (ok bool) {
 // https://core.telegram.org/bots/api#deletewebhook
 // TODO
 //
-func (b *Bot) DeleteWebhook() (ok bool) {
-	return false
+func (b *Bot) DeleteWebhook() (ok bool, err error) {
+	return false, nil
 }
 
 //

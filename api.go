@@ -55,9 +55,44 @@ var methods = map[string]APIMethod{
 		Action: "getChatMembersCount",
 		Method: http.MethodGet,
 	},
+	"getChatMember": APIMethod{
+		Name:   "getChatMember",
+		Action: "getChatMember",
+		Method: http.MethodGet,
+		Result: ChatMember{},
+	},
+	"getUserProfilePhotos": APIMethod{
+		Name:   "getUserProfilePhotos",
+		Action: "getUserProfilePhotos",
+		Method: http.MethodGet,
+		Result: UserProfilePhotos{},
+	},
+	"getFile": APIMethod{
+		Name:   "getFile",
+		Action: "getFile",
+		Method: http.MethodGet,
+		Result: File{},
+	},
+	"getStickerSet": APIMethod{
+		Name:   "getStickerSet",
+		Action: "getStickerSet",
+		Method: http.MethodGet,
+		Result: StickerSet{},
+	},
+	"exportChatInviteLink": APIMethod{
+		Name:   "exportChatInviteLink",
+		Action: "exportChatInviteLink",
+		Method: http.MethodPost,
+	},
 	"sendMessage": APIMethod{
 		Name:   "sendMessage",
 		Action: "sendMessage",
+		Method: http.MethodPost,
+		Result: Message{},
+	},
+	"forwardMessage": APIMethod{
+		Name:   "forwardMessage",
+		Action: "forwardMessage",
 		Method: http.MethodPost,
 		Result: Message{},
 	},
@@ -75,6 +110,72 @@ var methods = map[string]APIMethod{
 	"setChatDescription": APIMethod{
 		Name:   "setChatDescription",
 		Action: "setChatDescription",
+		Method: http.MethodPost,
+	},
+	"setChatAdministratorCustomTitle": APIMethod{
+		Name:   "setChatAdministratorCustomTitle",
+		Action: "setChatAdministratorCustomTitle",
+		Method: http.MethodPost,
+	},
+	"kickChatMember": APIMethod{
+		Name:   "kickChatMember",
+		Action: "kickChatMember",
+		Method: http.MethodPost,
+	},
+	"unbanChatMember": APIMethod{
+		Name:   "unbanChatMember",
+		Action: "unbanChatMember",
+		Method: http.MethodPost,
+	},
+	"deleteChatPhoto": APIMethod{
+		Name:   "deleteChatPhoto",
+		Action: "deleteChatPhoto",
+		Method: http.MethodPost,
+	},
+	"leaveChat": APIMethod{
+		Name:   "leaveChat",
+		Action: "leaveChat",
+		Method: http.MethodPost,
+	},
+	"setChatStickerSet": APIMethod{
+		Name:   "setChatStickerSet",
+		Action: "setChatStickerSet",
+		Method: http.MethodPost,
+	},
+	"deleteChatStickerSet": APIMethod{
+		Name:   "deleteChatStickerSet",
+		Action: "deleteChatStickerSet",
+		Method: http.MethodPost,
+	},
+	"pinChatMessage": APIMethod{
+		Name:   "pinChatMessage",
+		Action: "pinChatMessage",
+		Method: http.MethodPost,
+	},
+	"unpinChatMessage": APIMethod{
+		Name:   "unpinChatMessage",
+		Action: "unpinChatMessage",
+		Method: http.MethodPost,
+	},
+	"sendChatAction": APIMethod{
+		Name:   "sendChatAction",
+		Action: "sendChatAction",
+		Method: http.MethodPost,
+	},
+	"sendLocation": APIMethod{
+		Name:   "sendLocation",
+		Action: "sendLocation",
+		Method: http.MethodPost,
+		Result: Message{},
+	},
+	"deleteStickerFromSet": APIMethod{
+		Name:   "deleteStickerFromSet",
+		Action: "deleteStickerFromSet",
+		Method: http.MethodPost,
+	},
+	"setStickerPositionInSet": APIMethod{
+		Name:   "setStickerPositionInSet",
+		Action: "setStickerPositionInSet",
 		Method: http.MethodPost,
 	},
 }
