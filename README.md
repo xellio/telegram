@@ -44,6 +44,7 @@ user, err := bot.GetMe()
 - [setStickerPositionInSet](https://core.telegram.org/bots/api#setstickerpositioninset)
 ##### Game
 ##### Passport
+- [setPassportDataErrors](https://core.telegram.org/bots/api#setpassportdataerrors)
 ##### Payment
 - [sendInvoice](https://core.telegram.org/bots/api#sendinvoice)
 - [answerShippingQuery](https://core.telegram.org/bots/api#answershippingquery)
@@ -79,5 +80,4 @@ user, err := bot.GetMe()
 - [sendGame](https://core.telegram.org/bots/api#sendgame)
 - [setGameScore](https://core.telegram.org/bots/api#setgamescore)
 - [getGameHighScores](https://core.telegram.org/bots/api#getgamehighscores)
-##### Passport
-- [setPassportDataErrors](https://core.telegram.org/bots/api#setpassportdataerrors)
+

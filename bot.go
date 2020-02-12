@@ -4,8 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"reflect"
+	"time"
 )
 
 //
@@ -36,6 +38,34 @@ func New(token string) (*Bot, error) {
 }
 
 //
+// ListenForUpdates ...
+//
+func (b *Bot) ListenForUpdates(offset int, limit int, timeout int, allowedUpdates []string) (<-chan Update, error) {
+	ch := make(chan Update, 100)
+
+	go func() {
+		for {
+			updates, err := b.GetUpdates(offset, limit, timeout, allowedUpdates)
+			if err != nil {
+				log.Println(err)
+				time.Sleep(time.Second * 5)
+				continue
+			}
+
+			for _, update := range updates {
+
+				if update.UpdateID >= 1 {
+					offset = update.UpdateID + 1
+					ch <- *update
+				}
+			}
+		}
+	}()
+
+	return ch, nil
+}
+
+//
 // call executes an API call to the telegram API.
 //
 func (b *Bot) call(action string, payload ...interface{}) (interface{}, error) {
@@ -48,6 +78,7 @@ func (b *Bot) call(action string, payload ...interface{}) (interface{}, error) {
 		return nil, err
 	}
 
+	log.Println(req.URL)
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -64,6 +95,7 @@ func (b *Bot) call(action string, payload ...interface{}) (interface{}, error) {
 	if !res.OK {
 		return nil, fmt.Errorf("%d: %s", res.ErrorCode, res.Description)
 	}
+
 	return prepareResult(res.Result, definition.Result)
 
 }

@@ -205,6 +205,11 @@ var methods = map[string]APIMethod{
 		Action: "answerPreCheckoutQuery",
 		Method: http.MethodPost,
 	},
+	"setPassportDataErrors": APIMethod{
+		Name:   "setPassportDataErrors",
+		Action: "setPassportDataErrors",
+		Method: http.MethodPost,
+	},
 }
 
 //

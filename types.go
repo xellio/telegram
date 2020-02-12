@@ -43,7 +43,7 @@ type Chat struct {
 //
 type Message struct {
 	MessageID             int                   `json:"message_id"`
-	From                  *User                 `json:"user"`
+	From                  *User                 `json:"from"`
 	Date                  int                   `json:"date"`
 	Chat                  *Chat                 `json:"chat"`
 	ForwardFrom           *User                 `json:"forward_from"`

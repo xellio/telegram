@@ -62,7 +62,6 @@ type EncryptedCredentials struct {
 //  - PassportElementErrorTranslationFiles
 //  - PassportElementErrorUnspecified
 // https://core.telegram.org/bots/api#passportelementerror
-// TODO
 //
 type PassportElementError interface {
 }
@@ -71,27 +70,37 @@ type PassportElementError interface {
 // PassportElementErrorDataField - Represents an issue in one of the data fields that was provided by the user.
 // The error is considered resolved when the field's value changes.
 // https://core.telegram.org/bots/api#passportelementerrordatafield
-// TODO
 //
 type PassportElementErrorDataField struct {
+	Source    string `json:"source"`
+	Type      string `json:"type"`
+	Message   string `json:"message"`
+	FieldName string `json:"field_name"`
+	DataHash  string `json:"data_hash"`
 }
 
 //
 // PassportElementErrorFrontSide - Represents an issue with the front side of a document.
 // The error is considered resolved when the file with the front side of the document changes.
 // https://core.telegram.org/bots/api#passportelementerrorfrontside
-// TODO
 //
 type PassportElementErrorFrontSide struct {
+	Source   string `json:"source"`
+	Type     string `json:"type"`
+	Message  string `json:"message"`
+	FileHash string `json:"file_hash"`
 }
 
 //
 // PassportElementErrorReverseSide - Represents an issue with the reverse side of a document.
 // The error is considered resolved when the file with reverse side of the document changes.
 // https://core.telegram.org/bots/api#passportelementerrorreverseside
-// TODO
 //
 type PassportElementErrorReverseSide struct {
+	Source   string `json:"source"`
+	Type     string `json:"type"`
+	Message  string `json:"message"`
+	FileHash string `json:"file_hash"`
 }
 
 //
@@ -101,51 +110,70 @@ type PassportElementErrorReverseSide struct {
 // TODO
 //
 type PassportElementErrorSelfie struct {
+	Source   string `json:"source"`
+	Type     string `json:"type"`
+	Message  string `json:"message"`
+	FileHash string `json:"file_hash"`
 }
 
 //
 // PassportElementErrorFile - Represents an issue with a document scan.
 // The error is considered resolved when the file with the document scan changes.
 // https://core.telegram.org/bots/api#passportelementerrorfile
-// TODO
 //
 type PassportElementErrorFile struct {
+	Source   string `json:"source"`
+	Type     string `json:"type"`
+	Message  string `json:"message"`
+	FileHash string `json:"file_hash"`
 }
 
 //
 // PassportElementErrorFiles - Represents an issue with a list of scans.
 // The error is considered resolved when the list of files containing the scans changes.
 // https://core.telegram.org/bots/api#passportelementerrorfiles
-// TODO
 //
 type PassportElementErrorFiles struct {
+	Source     string   `json:"source"`
+	Type       string   `json:"type"`
+	Message    string   `json:"message"`
+	FileHashes []string `json:"file_hashes"`
 }
 
 //
 // PassportElementErrorTranslationFile - Represents an issue with one of the files that constitute the translation of a document.
 // The error is considered resolved when the file changes.
 // https://core.telegram.org/bots/api#passportelementerrortranslationfile
-// TODO
 //
 type PassportElementErrorTranslationFile struct {
+	Source   string `json:"source"`
+	Type     string `json:"type"`
+	Message  string `json:"message"`
+	FileHash string `json:"file_hash"`
 }
 
 //
 // PassportElementErrorTranslationFiles - Represents an issue with the translated version of a document.
 // The error is considered resolved when a file with the document translation change.
 // https://core.telegram.org/bots/api#passportelementerrortranslationfiles
-// TODO
 //
 type PassportElementErrorTranslationFiles struct {
+	Source     string `json:"source"`
+	Type       string `json:"type"`
+	Message    string `json:"message"`
+	FileHashes string `json:"file_hashes"`
 }
 
 //
 // PassportElementErrorUnspecified - Represents an issue in an unspecified place.
 // The error is considered resolved when new data is added.
 // https://core.telegram.org/bots/api#passportelementerrorunspecified
-// TODO
 //
 type PassportElementErrorUnspecified struct {
+	Source      string `json:"source"`
+	Type        string `json:"type"`
+	Message     string `json:"message"`
+	ElementHash string `json:"element_hash"`
 }
 
 //
@@ -153,8 +181,15 @@ type PassportElementErrorUnspecified struct {
 // The user will not be able to re-submit their Passport to you until the errors are fixed (the contents of the field for which you returned the error must change).
 // Use this if the data submitted by the user doesn't satisfy the standards your service requires for any reason. For example, if a birthday date seems invalid, a submitted document is blurry, a scan shows evidence of tampering, etc. Supply some details in the error message to make sure the user knows how to correct the issues.
 // https://core.telegram.org/bots/api#setpassportdataerrors
-// TODO
 //
-func (b *Bot) SetPassportDataErrors() (ok bool, err error) {
-	return false, nil
+func (b *Bot) SetPassportDataErrors(userID int, errors []PassportElementError) (ok bool, err error) {
+	params := map[string]interface{}{
+		"user_id": userID,
+		"errors":  errors,
+	}
+	result, err := b.call("setPassportDataErrors", params)
+	if err != nil {
+		return false, err
+	}
+	return result.(bool), nil
 }
